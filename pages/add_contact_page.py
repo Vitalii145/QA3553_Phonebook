@@ -69,26 +69,7 @@ class ContactPage(BasePage):
         # self.driver.find_element(*self.SAVE_BTN).click()
         self.click(self.SAVE_BTN)
 
-    def contact_card_visible(self,phone):
-        locator = (By.XPATH,f"//h3[text()='{phone}']")
-        element = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(locator))
-        return element.is_displayed()
-
-    def open_contact_details(self,phone):
-        card = self.driver.find_element(By.XPATH,f"//h3[text()='{phone}']/...")
-        card.click()
-
-    def open_contact_link(self):
-        self.click(self.CONTACT_NAV_LINK)
-        WebDriverWait(self.driver, 5).until(
-            EC.url_contains("/contacts")
-        )
-        time.sleep(1)
-
     def is_add_button_active(self):
         add_link = self.find(self.ADD_NAV_LINK)
         return "active" in add_link.get_attribute("class")
 
-    def contact_cards_count(self,phone):
-        return len(self.driver.find_elements(By.XPATH,f"//h3[text()='{phone}']"))

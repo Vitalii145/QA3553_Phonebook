@@ -1,16 +1,16 @@
 from selenium import webdriver
+
+from data.user_data import create_user, exiting_user
 from pages.login_page import LoginPage
 
-VALID_EMAIL = 'vitalii.dev2026@outlook.com'
-VALID_PASSWORD = 'N7!qR4#vL9@xT2'
-INVALID_EMAIL = 'vitalii.dev2026outlook.com'
-INVALID_PASSWORD = 'NqR4L9@xT2'
+
 
 def test_login_success(driver):
     login_page = LoginPage(driver)
+    user = exiting_user()
     login_page.open_login_form()
-    login_page.fill_email(VALID_EMAIL)
-    login_page.fill_password(VALID_PASSWORD)
+    login_page.fill_email(user.username)
+    login_page.fill_password(user.password)
     login_page.submit_login()
 
 

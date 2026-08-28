@@ -1,23 +1,18 @@
 import random
-
 import pytest
 from faker import Faker
+from data.Contact_data import create_contact
 from models.contacts import Contact
 from pages import login_page
 from pages.add_contact_page import ContactPage
+from pages.contacts_page import ContactsPage
 
 fake = Faker()
 def test_add_contact_success_all_fields(authenticated_driver):
     contact_page = ContactPage(authenticated_driver)
+    contact_page = ContactPage(authenticated_driver)
     random_suffix = random.randint(1,1_000_000)
-    contact = Contact(
-        "Anna",
-        "Test",
-        f"05012{random_suffix}",
-        f"anna_test_{random_suffix}@gmail.com",
-        "Kiev",
-        "QA lesson contact"
-    )
+    contact = create_contact()
 
     contact_page.open_contact_form()
     contact_page.fill_contact_form(contact)
@@ -27,16 +22,9 @@ def test_add_contact_success_all_fields(authenticated_driver):
 
 def test_add_contact_success_req_fields(authenticated_driver):
     contact_page = ContactPage(authenticated_driver)
-    random_suffix = random.randint(1,1_000_000)
-    contact = Contact(
-        name=fake.first_name(),
-        last_name=fake.last_name(),
-        # phone=f"05012{random_suffix}",
-        phone=fake.numerify("05##########"),
-        email=fake.unique.email(),
-        address=fake.street_address(),
-        description=fake.sentence(nb_words=5),
-    )
+    contact_page = ContactPage(authenticated_driver)
+    contact = create_contact(description="")
+
 
     contact_page.open_contact_form()
     contact_page.fill_contact_form(contact)
@@ -49,22 +37,17 @@ EMAIL_ALERT_TEXT = "Email not valid: must be a well-formed email address"
 
 def test_add_contact_empty_name(authenticated_driver):
     contact_page = ContactPage(authenticated_driver)
+    contact_page = ContactPage(authenticated_driver)
 
-    contact = Contact(
-        name="",
-        last_name=fake.last_name(),
-        phone=fake.numerify("05##########"),
-        email=fake.unique.email(),
-        address=fake.street_address(),
-        description=fake.sentence(nb_words=5),
-    )
+    contact = create_contact(name="")
+
+
     contact_page.open_contact_form()
     contact_page.fill_contact_form(contact)
     contact_page.submit_contact()
 
     assert contact_page.is_add_button_active()
 
-    contact_page.open_contact_link()
     assert contact_page.contact_cards_count(contact.phone) == 0
 
 
