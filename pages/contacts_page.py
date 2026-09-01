@@ -15,11 +15,11 @@ class ContactsPage(BasePage):
         WebDriverWait(self.driver, 5).until(
             EC.url_contains("/contacts")
          )
-    time.sleep(1)
+        time.sleep(1)
 
     def open_contact_details(self,phone):
-        card = self.driver.find_element(By.XPATH,f"//h3[text()='{phone}']/...")
-        card.click()
+        locator = (By.XPATH, self.CONTACT_CARDS)
+        self.click(locator)
 
 
     def contact_card_visible(self, phone):
