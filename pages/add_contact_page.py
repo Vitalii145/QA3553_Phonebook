@@ -1,12 +1,12 @@
 import time
-
+import logging
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from pages.base_page import BasePage
 
-
+logger = logging.getLogger(__name__)
 class ContactPage(BasePage):
     ADD_NAV_LINK = (By.CSS_SELECTOR, "[href = '/add']")
     NAME_INPUT = (By.CSS_SELECTOR, "input[placeholder='Name']")
@@ -74,6 +74,7 @@ class ContactPage(BasePage):
         return "active" in add_link.get_attribute("class")
 
     def create_contact_steps(self, contact):
+        logger.info(f"Creating contact steps:{contact.phone}")
         self.open_contact_form()
         self.fill_contact_form(contact)
         self.submit_contact()

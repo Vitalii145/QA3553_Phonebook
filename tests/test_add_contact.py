@@ -13,10 +13,7 @@ def test_add_contact_success_all_fields(authenticated_driver):
     random_suffix = random.randint(1,1_000_000)
     contact = create_contact()
 
-    contact_page.open_contact_form()
-    contact_page.fill_contact_form(contact)
-    contact_page.submit_contact()
-
+    contact_page.create_contact_steps(contact)
     assert contacts_page.contact_card_visible(contact.phone)
 
 def test_add_contact_success_req_fields(authenticated_driver):
