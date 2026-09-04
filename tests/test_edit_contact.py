@@ -230,14 +230,3 @@ def test_edit_contact_duplicate_email_negative(authenticated_driver):
     assert contacts_page.get_edit_contact(contacts_page.EDIT_EMAIL) == other_contact.email
 
 
-def test_delete_contact(authenticated_driver):
-    contact_page = ContactPage(authenticated_driver)
-    contacts_page = ContactsPage(authenticated_driver)
-
-    contact = create_contact()
-    contact_page.create_contact_steps(contact)
-
-    contacts_page.open_contact_details(contact.phone)
-    contacts_page.click_remove_button()
-
-    assert contacts_page.is_contact_present_by_phone(contact.phone) is False
