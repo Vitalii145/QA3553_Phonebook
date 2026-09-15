@@ -14,12 +14,15 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture
 def driver():
+    logger.info('start driver')
+
     driver = webdriver.Chrome()
     driver.implicitly_wait(5)
     driver.maximize_window()
     driver.get("https://telranedu.web.app/")
 
     yield driver
+    logger.info('end driver')
     driver.quit()
 
 
@@ -30,6 +33,9 @@ def authenticated_driver(driver):
 
     user = exiting_user()
     login_page = LoginPage(driver)
+
+    logger.info(f"Logged in user:{user.username}")
+
     login_page.open_login_form()
     login_page.fill_email(user.username)
     login_page.fill_password(user.password)
@@ -43,6 +49,10 @@ def ensure_min_contacts(authenticated_driver):
     contact_page = ContactPage(authenticated_driver)
 
     contacts_page.open_contact_link()
+    count = contacts_page.total_contacts_count()
+    if count < 3:
+        logger.warning(f"Contact list has {count} contacts. creating new one")
+
     while contacts_page.total_contacts_count() < 3:
         contact_page.create_contact_steps(create_contact())
         contacts_page.open_contact_link()

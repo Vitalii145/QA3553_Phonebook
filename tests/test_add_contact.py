@@ -1,5 +1,6 @@
 import random
 import pytest
+import logging
 from faker import Faker
 from data.Contact_data import create_contact
 from models.contacts import Contact
@@ -7,7 +8,9 @@ from pages.add_contact_page import ContactPage
 from pages.contacts_page import ContactsPage
 
 fake = Faker()
+logger = logging.getLogger(__name__)
 def test_add_contact_success_all_fields(authenticated_driver):
+    logger.info(f"Testing adding all fields")
     contact_page = ContactPage(authenticated_driver)
     contacts_page = ContactsPage(authenticated_driver)
     random_suffix = random.randint(1,1_000_000)

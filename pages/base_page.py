@@ -1,8 +1,10 @@
 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+import logging
 
 
+logger = logging.getLogger(__name__)
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
@@ -11,9 +13,11 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def click(self, locator):
+        logger.info(f"click on")
         self.find(locator).click()
 
     def fill(self, locator, value):
+        logger.info(f"fill on with {value}")
         self.find(locator).clear()
         self.find(locator).send_keys(value)
 

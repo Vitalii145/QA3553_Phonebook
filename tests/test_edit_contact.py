@@ -3,15 +3,21 @@ import pytest
 from data.Contact_data import create_contact
 from pages.add_contact_page import ContactPage
 from pages.contacts_page import ContactsPage
+from  utils.logger_config import configure_logging
 
+
+logger = configure_logging()
 fake = Faker()
 def test_edit_contact_name_updated(authenticated_driver):
+    logger.info("Запуск теста: test_edit_contact_name_updated")
     contact_page = ContactPage(authenticated_driver)
     contacts_page = ContactsPage(authenticated_driver)
 
     contact = create_contact()
+    logger.debug(f"Подготовка: создание тестового контакта (телефон: {contact.phone})")
     contact_page.create_contact_steps(contact)
     new_name = fake.first_name()
+    logger.info(f"Шаг: редактирование имени контакта на '{new_name}'")
 
     contacts_page.open_contact_details(contact.phone)
     contacts_page.open_edit_mode()
@@ -19,7 +25,7 @@ def test_edit_contact_name_updated(authenticated_driver):
     contacts_page.submit_edit()
 
     assert contacts_page.contact_name_for_phone(contact.phone) == new_name
-
+    logger.info("Успех: тест test_edit_contact_name_updated пройден")
 
 def test_edit_contact_last_name_updated(authenticated_driver):
     contact_page = ContactPage(authenticated_driver)
@@ -39,9 +45,9 @@ def test_edit_contact_last_name_updated(authenticated_driver):
     assert contacts_page.get_edit_contact(contacts_page.EDIT_LAST_NAME) == new_last_name
 
 
-def test_edit_contact_phone_updated(authenticated_driver):
-    contact_page = ContactPage(authenticated_driver)
-    contacts_page = ContactsPage(authenticated_driver)
+def test_edit_contact_phone_updated(ensure_min_contacts):
+    contact_page = ContactPage(ensure_min_contacts)
+    contacts_page = ContactsPage(ensure_min_contacts)
 
     contact = create_contact()
     contact_page.create_contact_steps(contact)
