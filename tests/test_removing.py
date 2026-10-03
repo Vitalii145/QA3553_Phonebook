@@ -1,13 +1,11 @@
 import time
 
-from faker import Faker
-import pytest
-from selenium.webdriver.support.wait import WebDriverWait
-
+import logging
 from data.Contact_data import create_contact
 from pages.add_contact_page import ContactPage
 from pages.contacts_page import ContactsPage
 
+logger = logging.getLogger(__name__)
 def test_delete_contact(authenticated_driver):
     contact_page = ContactPage(authenticated_driver)
     contacts_page = ContactsPage(authenticated_driver)
