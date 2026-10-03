@@ -109,6 +109,51 @@ def test_add_contact_invalid_phone(authenticated_driver):
     contacts_page.open_contact_link()
     assert contacts_page.contact_cards_count(contact.phone) == 0
 
+def test_add_contact_invalid_phone_too_short(authenticated_driver):
+    contact_page = ContactPage(authenticated_driver)
+    contacts_page = ContactsPage(authenticated_driver)
+    contact = create_contact(phone="0504")
+
+    contact_page.open_contact_form()
+    contact_page.fill_contact_form(contact)
+    contact_page.submit_contact()
+
+    assert contact_page.get_alert_text().strip() == PHONE_ALERT_TEXT
+    contact_page.accept_alert()
+    assert contact_page.is_add_button_active()
+
+    contacts_page.open_contact_link()
+    assert contacts_page.contact_cards_count(contact.phone) == 0
+
+def test_add_contact_invalid_phone_too_long(authenticated_driver):
+    contact_page = ContactPage(authenticated_driver)
+    contacts_page = ContactsPage(authenticated_driver)
+    contact = create_contact(phone=fake.numerify("#"*20))
+
+    contact_page.create_contact_steps(contact)
+
+    assert contact_page.get_alert_text().strip() == PHONE_ALERT_TEXT
+    contact_page.accept_alert()
+    assert contact_page.is_add_button_active()
+
+    contacts_page.open_contact_link()
+    assert contacts_page.contact_cards_count(contact.phone) == 0
+
+
+def test_add_contact_invalid_phone_letters(authenticated_driver):
+    contact_page = ContactPage(authenticated_driver)
+    contacts_page = ContactsPage(authenticated_driver)
+    contact = create_contact(phone="jfhkdfghkfdh")
+
+    contact_page.create_contact_steps(contact)
+
+
+    assert contact_page.get_alert_text().strip() == PHONE_ALERT_TEXT
+    contact_page.accept_alert()
+    assert contact_page.is_add_button_active()
+
+    contacts_page.open_contact_link()
+    assert contacts_page.contact_cards_count(contact.phone) == 0
 # @pytest.mark.skip(reason = "Bug-123: Contact with empty mail")
 # @pytest.mark.xfail(reason = "Bug-123: Contact with empty mail")
 def test_add_contact_invalid_email(authenticated_driver):

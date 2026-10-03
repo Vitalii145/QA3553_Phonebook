@@ -1,13 +1,17 @@
+import logging
+
 from selenium import webdriver
 
 from data.user_data import create_user, exiting_user
 from pages.login_page import LoginPage
 
 
-
+logger = logging.getLogger(__name__)
 def test_login_success(driver):
     login_page = LoginPage(driver)
     user = exiting_user()
+    logger.info("Successfully logged in:username=%s", user.username)
+    logger.info("Successfully logged in:email=%s", user.email)
     login_page.open_login_form()
     login_page.fill_email(user.username)
     login_page.fill_password(user.password)
