@@ -52,11 +52,11 @@ class LoginPage(BasePage):
         except TimeoutException:
             return False
 
-    def get_alert_text(self):
-        alert = WebDriverWait(self.driver, 5).until(
-            expected_conditions.alert_is_present()
-        )
-        return alert.text
-
-    def accept_alert(self):
-        self.driver.switch_to.alert.accept()
+    # def get_alert_text(self):
+    #     alert = WebDriverWait(self.driver, 5).until(
+    #         expected_conditions.alert_is_present()
+    #     )
+    #     return alert.text
+    #
+    # def accept_alert(self):
+    #     self.driver.switch_to.alert.accept()

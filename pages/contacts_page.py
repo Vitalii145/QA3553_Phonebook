@@ -8,6 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
 
 logger = logging.getLogger(__name__)
+
 class ContactsPage(BasePage):
     CONTACT_NAV_LINK = (By.CSS_SELECTOR, "[href='/contacts']")
     CONTACT_CARDS = (By.CLASS_NAME,"contact-item_card__2SOIM")
@@ -30,7 +31,7 @@ class ContactsPage(BasePage):
 
     def open_contact_details(self,phone):
         logger.info(f"Opening contact details for phone: {phone}")
-        locator = (By.XPATH, f"//h3[text()='{phone}']")
+        locator = (By.XPATH, f"//h3[text()='{phone}']/..")
         self.click(locator)
 
 
@@ -95,10 +96,9 @@ class ContactsPage(BasePage):
     #         self.click_remove_button()
 
     def open_first_contact(self):
-        element = WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable(self.CONTACT_CARDS)
-        )
-        element.click()
+        cards = self.driver.find_elements(*self.CONTACT_CARDS)
+        first_card = cards[0]
+        first_card.click()
 
     def remove_all_contacts(self):
         from selenium.common.exceptions import StaleElementReferenceException, TimeoutException

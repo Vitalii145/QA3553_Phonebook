@@ -19,7 +19,8 @@ class RegistrationPage(BasePage):
 
     def open_registration_form(self):
         # self.driver.find_element(*self.REGISTRATION_NAV_LINK).click()
-        self.click(*self.REGISTRATION_NAV_LINK)
+        self.click(self.REGISTRATION_NAV_LINK)
+
     def fill_email(self, email):
         # self.driver.find_element(*self.EMAIL_INPUT).clear()
         # self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
@@ -33,7 +34,8 @@ class RegistrationPage(BasePage):
 
 
     def submit_registration(self):
-        self.driver.find_element(*self.REGISTRATION_BUTTON).click()
+        # self.driver.find_element(*self.REGISTRATION_BUTTON).click()
+        self.click(self.REGISTRATION_BUTTON)
 
     def is_registered(self):
         try:

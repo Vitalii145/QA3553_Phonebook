@@ -13,11 +13,11 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def click(self, locator):
-        logger.info(f"click on")
+        logger.info(f"click on {locator}")
         self.find(locator).click()
 
     def fill(self, locator, value):
-        logger.info(f"fill on with {value}")
+        logger.info(f"fill{locator} with {value}")
         self.find(locator).clear()
         self.find(locator).send_keys(value)
 
