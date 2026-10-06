@@ -24,10 +24,11 @@ class ContactsPage(BasePage):
 
     def open_contact_link(self):
         self.click(self.CONTACT_NAV_LINK)
-        WebDriverWait(self.driver, 5).until(
-            EC.url_contains("/contacts")
-         )
-        time.sleep(1)
+        # WebDriverWait(self.driver, 5).until(
+        #     EC.url_contains("/contacts")
+        #  )
+        # time.sleep(1)
+        self.wait_until_url_matches(r"/contacts$")
 
     def open_contact_details(self,phone):
         logger.info(f"Opening contact details for phone: {phone}")
@@ -37,9 +38,9 @@ class ContactsPage(BasePage):
 
     def contact_card_visible(self, phone):
         locator = (By.XPATH, f"//h3[text()='{phone}']")
-        element = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(locator))
-        return element.is_displayed()
+        # element = WebDriverWait(self.driver, 5).until(
+        #     EC.presence_of_element_located(locator))
+        return self.wait_until_visible(locator).is_displayed()
 
 
     def contact_cards_count(self, phone):

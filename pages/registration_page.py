@@ -39,9 +39,10 @@ class RegistrationPage(BasePage):
 
     def is_registered(self):
         try:
-            WebDriverWait(self.driver, 5).until(
-                expected_conditions.visibility_of_element_located(self.SIGN_OUT_BUTTON)
-            )
+            # WebDriverWait(self.driver, 5).until(
+            #     expected_conditions.visibility_of_element_located(self.SIGN_OUT_BUTTON)
+            # )
+            self.wait_until_visible(self.SIGN_OUT_BUTTON)
             return True
         except TimeoutException:
             return False
