@@ -17,12 +17,12 @@ class LoginPage(BasePage):
 
     # def __init__(self, driver):
     #     self.driver = driver
-@allure.step("Open login form")
+    @allure.step("Open login form")
     def open_login_form(self):
         # self.driver.find_element(*self.LOGIN_NAV_LINK).click()
         logger.info("Opening login form")
         self.click(self.LOGIN_NAV_LINK)
-@allure.step("fill email")
+    @allure.step("fill email")
     def fill_email(self, email):
         # self.driver.find_element(*self.EMAIL_INPUT).clear()
         # self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
