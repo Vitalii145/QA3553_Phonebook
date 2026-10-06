@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
+import allure
 import pytest
 from selenium import webdriver
 import logging
@@ -58,6 +59,11 @@ def save_screenshot_on_failure(request,driver):
     logger.error("Test failed: %s", request.node.nodeid)
     if driver.save_screenshot(str(screenshot_path)):
         logger.info("Screenshot saved: %s", screenshot_path)
+        allure.attach.file(
+            str(screenshot_path),
+            name="screenshot",
+            attachment_type=allure.attachment_type.PNG
+        )
 
 @pytest.fixture
 def authenticated_driver(driver):

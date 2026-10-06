@@ -1,0 +1,8 @@
+2026-10-06 19:08:38 - [36mINFO[0m - conftest - Start browser session[0m
+2026-10-06 19:08:54 - [36mINFO[0m - tests.test_login - Successfully logged in:username=vitalii.dev2026@outlook.com[0m
+2026-10-06 19:08:54 - [36mINFO[0m - pages.login_page - Opening login form[0m
+2026-10-06 19:08:54 - [36mINFO[0m - pages.base_page - click on ('css selector', "[href='/login']")[0m
+2026-10-06 19:08:54 - [36mINFO[0m - pages.base_page - fill('css selector', "input[name='email']") with vitalii.dev2026@outlook.com[0m
+2026-10-06 19:08:54 - [36mINFO[0m - pages.base_page - fill('css selector', "input[name='password']") with N7!qR4#vL9@xT2[0m
+2026-10-06 19:08:54 - [36mINFO[0m - pages.base_page - click on ('xpath', "//button[text()='Login']")[0m
+2026-10-06 19:08:56 - [36mINFO[0m - conftest - Closing browser session[0m

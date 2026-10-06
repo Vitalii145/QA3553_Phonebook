@@ -1,0 +1,8 @@
+2026-10-06 19:09:12 - [36mINFO[0m - conftest - Start browser session[0m
+2026-10-06 19:09:15 - [36mINFO[0m - tests.test_login - Testing rejected login: case = create_user, username=kevinbonilla@example.net[0m
+2026-10-06 19:09:15 - [36mINFO[0m - pages.login_page - Opening login form[0m
+2026-10-06 19:09:15 - [36mINFO[0m - pages.base_page - click on ('css selector', "[href='/login']")[0m
+2026-10-06 19:09:15 - [36mINFO[0m - pages.base_page - fill('css selector', "input[name='email']") with kevinbonilla@example.net[0m
+2026-10-06 19:09:15 - [36mINFO[0m - pages.base_page - fill('css selector', "input[name='password']") with )r8DLHUv1l5N[0m
+2026-10-06 19:09:15 - [36mINFO[0m - pages.base_page - click on ('xpath', "//button[text()='Login']")[0m
+2026-10-06 19:09:17 - [36mINFO[0m - conftest - Closing browser session[0m

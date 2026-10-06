@@ -1,0 +1,8 @@
+2026-10-06 19:09:05 - [36mINFO[0m - conftest - Start browser session[0m
+2026-10-06 19:09:08 - [36mINFO[0m - tests.test_login - Testing rejected login: case = invalid_password_user, username=vitalii.dev2026@outlook.com[0m
+2026-10-06 19:09:08 - [36mINFO[0m - pages.login_page - Opening login form[0m
+2026-10-06 19:09:08 - [36mINFO[0m - pages.base_page - click on ('css selector', "[href='/login']")[0m
+2026-10-06 19:09:08 - [36mINFO[0m - pages.base_page - fill('css selector', "input[name='email']") with vitalii.dev2026@outlook.com[0m
+2026-10-06 19:09:08 - [36mINFO[0m - pages.base_page - fill('css selector', "input[name='password']") with NqR4L9@xT2[0m
+2026-10-06 19:09:08 - [36mINFO[0m - pages.base_page - click on ('xpath', "//button[text()='Login']")[0m
+2026-10-06 19:09:10 - [36mINFO[0m - conftest - Closing browser session[0m
