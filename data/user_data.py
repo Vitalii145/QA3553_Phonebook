@@ -1,5 +1,6 @@
 from faker import Faker
 from models.users import User
+from utils.config import EXIYING_USER_EMAIL, EXIYING_USER_PASSWORD
 
 fake = Faker()
 def create_user(username= None,password =None):
@@ -9,8 +10,7 @@ def create_user(username= None,password =None):
             length=12, special_chars=True, digits=True, upper_case=True, lower_case=True
         )
     )
-EXIYING_USER_EMAIL = 'vitalii.dev2026@outlook.com'
-EXIYING_USER_PASSWORD = 'N7!qR4#vL9@xT2'
+
 INVALID_EMAIL = 'vitalii.dev2026outlook.com'
 INVALID_PASSWORD = 'NqR4L9@xT2'
 
