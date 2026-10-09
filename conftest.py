@@ -14,6 +14,7 @@ from data.user_data import exiting_user
 from pages.add_contact_page import ContactPage
 from pages.contacts_page import ContactsPage
 from pages.login_page import LoginPage
+from utils.config import BASE_URL
 from utils.logger_config import configure_logging
 from utils.selenium_listener_3 import SeleniumEventListener
 
@@ -21,14 +22,30 @@ configure_logging()
 logger = logging.getLogger(__name__)
 SCREENSHOTS_DIR = Path(__file__).parent / "screenshots"
 
-@pytest.fixture
-def driver():
-    logger.info('Start browser session')
+def pytest_addoption(parser):
+    parser.addoption("--browser",
+        action = "store",
+        default = "chrome",
+        choices = ["chrome", "firefox"],
+        help= "Browser to run tests in: Chrome or Firefox")
 
-    driver = webdriver.Chrome()
+
+@pytest.fixture
+def driver(request):
+
+    global driver
+    browser = request.config.getoption("--browser")
+    logger.info('Start browser session')
+    if browser == "chrome":
+        driver = webdriver.Chrome()
+    elif browser == "firefox":
+        driver = webdriver.Firefox()
+    else:
+        raise ValueError(f"Unsupported browser {browser}")
+
     driver.implicitly_wait(5)
     driver.maximize_window()
-    driver.get("https://telranedu.web.app/")
+    driver.get(BASE_URL)
 
     yield EventFiringWebDriver(driver,SeleniumEventListener())
     logger.info('Closing browser session')
