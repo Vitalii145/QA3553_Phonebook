@@ -28,24 +28,38 @@ def pytest_addoption(parser):
         default = "chrome",
         choices = ["chrome", "firefox"],
         help= "Browser to run tests in: Chrome or Firefox")
+    parser.addoption(
+        "--headless",
+        action="store_true",
+        default = False,
+        help = "Run the tests in headless mode"
+    )
 
 
 @pytest.fixture
 def driver(request):
-
-    global driver
     browser = request.config.getoption("--browser")
+    headless = request.config.getoption("--headless")
+
     logger.info('Start browser session')
+
     if browser == "chrome":
-        driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        if headless:
+            options.add_argument("--headless=new")
+        driver = webdriver.Chrome(options=options)
     elif browser == "firefox":
-        driver = webdriver.Firefox()
+        options = webdriver.FirefoxOptions()
+        if headless:
+            options.add_argument("--headless")
+        driver = webdriver.Firefox(options=options)
     else:
         raise ValueError(f"Unsupported browser {browser}")
 
     driver.implicitly_wait(5)
     driver.maximize_window()
     driver.get(BASE_URL)
+
 
     yield EventFiringWebDriver(driver,SeleniumEventListener())
     logger.info('Closing browser session')
