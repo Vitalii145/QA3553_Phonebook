@@ -22,3 +22,23 @@ jobs:
           EXIYING_USER_EMAIL: ${{secrets.EXIYING_USER_EMAIL}}
           EXIYING_USER_PASSWORD: ${{secrets.EXIYING_USER_PASSWORD}}
         run: pytest tests/test_login.py --browser=chrome --headless
+
+
+  test-firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: action/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run UI tests (Firefox)
+        env:
+          BASE_URL: ${{secrets.BASE_URL}}
+          EXIYING_USER_EMAIL: ${{secrets.EXIYING_USER_EMAIL}}
+          EXIYING_USER_PASSWORD: ${{secrets.EXIYING_USER_PASSWORD}}
+        run: pytest tests/test_login.py --browser=firefox --headless
