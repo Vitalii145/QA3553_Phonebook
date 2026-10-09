@@ -21,4 +21,4 @@ jobs:
           BASE_URL: ${{secrets.BASE_URL}}
           EXIYING_USER_EMAIL: ${{secrets.EXIYING_USER_EMAIL}}
           EXIYING_USER_PASSWORD: ${{secrets.EXIYING_USER_PASSWORD}}
-      - run: pytest tests/test_login.py --browser=chrome --headless
+        run: pytest tests/test_login.py --browser=chrome --headless
